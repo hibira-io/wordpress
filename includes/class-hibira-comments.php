@@ -62,8 +62,8 @@ class Hibira_Comments {
 			return;
 		}
 		$data = self::payload( $comment );
-		if ( strlen( wp_json_encode( $data ) ) > Hibira_Client::MAX_DATA ) {
-			// Too long to carry: readers get a notice with a link instead.
+		if ( strlen( wp_json_encode( $data ) ) > Hibira_Client::SAFE_DATA ) {
+			// Too long for the free plan's 4 KB: readers get a notice with a link instead.
 			$data['html'] = '';
 		}
 		hibira_trigger( Hibira_Posts::channel( $post->ID ), 'comment-approved', $data, false );

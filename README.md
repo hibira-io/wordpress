@@ -52,7 +52,7 @@ managers, or a guest with the order key from the order received URL.
 ## For developers
 
 ```php
-// Send your own events (10 KB at most, up to 100 channels).
+// Send your own events (up to 100 channels; data up to 4 KB on the free plan, 10 KB on paid plans).
 hibira_trigger( 'scores', 'goal', array( 'team' => 'home' ) );
 
 // Or, without failing when the plugin is off:

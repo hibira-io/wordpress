@@ -16,8 +16,11 @@ class Hibira_Client {
 	/** Hibira refuses events with more channels than this. */
 	const MAX_CHANNELS = 100;
 
-	/** Hibira refuses event data larger than this, in bytes. */
+	/** Hibira refuses event data larger than this, in bytes, on any plan. */
 	const MAX_DATA = 10240;
+
+	/** Event data up to this size fits every plan, the free plan included. */
+	const SAFE_DATA = 4096;
 
 	private $app_id;
 	private $key;
