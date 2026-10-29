@@ -1,0 +1,124 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Hibira Realtime 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/hibira-io/wordpress/issues\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+"X-Domain: hibira\n"
+
+msgid "Settings"
+msgstr "設定"
+
+msgid "You are not allowed to do this."
+msgstr "この操作を行う権限がありません。"
+
+msgid "Connected. A test event was sent to the channel \"hibira-test\"; you can see it in the debug console of your app in the Hibira portal."
+msgstr "接続しました。テストイベントをチャンネル「hibira-test」に送信しました。Hibira ポータルのアプリのデバッグコンソールで確認できます。"
+
+msgid "Create a free app at %s (no card needed), then copy its app ID, key and secret here."
+msgstr "%s で無料のアプリを作成し（カード不要）、App ID、Key、Secret をここに貼り付けてください。"
+
+msgid "Connection"
+msgstr "接続"
+
+msgid "App ID"
+msgstr "App ID"
+
+msgid "Key"
+msgstr "Key"
+
+msgid "Secret"
+msgstr "Secret"
+
+msgid "Saved. Leave empty to keep it."
+msgstr "保存済みです。空欄のままにすると変更しません。"
+
+msgid "Never sent to browsers. To keep it out of the database, define HIBIRA_APP_SECRET in wp-config.php instead."
+msgstr "ブラウザには送信されません。データベースに保存したくない場合は、wp-config.php で HIBIRA_APP_SECRET を定義してください。"
+
+msgid "Host"
+msgstr "ホスト"
+
+msgid "ws.hibira.io for the default cluster. Change it only for another cluster or a self-hosted server."
+msgstr "デフォルトのクラスターは ws.hibira.io です。別のクラスターやセルフホストのサーバーを使う場合だけ変更してください。"
+
+msgid "Port"
+msgstr "ポート"
+
+msgid "TLS (https and wss)"
+msgstr "TLS（https と wss）"
+
+msgid "Features"
+msgstr "機能"
+
+msgid "Live comments"
+msgstr "ライブコメント"
+
+msgid "Approved comments appear for every reader of the post without a reload."
+msgstr "承認されたコメントが、再読み込みなしで記事を読んでいる全員に表示されます。"
+
+msgid "Post updated notice"
+msgstr "記事更新のお知らせ"
+
+msgid "Readers of a post see a notice with a reload button when you update it."
+msgstr "記事を更新すると、読んでいる人に再読み込みボタン付きのお知らせが表示されます。"
+
+msgid "Readers now"
+msgstr "閲覧中の人数"
+
+msgid "Shows how many people are reading a post. Each reader holds a presence channel connection; counts above 100 show as 100+. It shows in a corner of the page, or where you put the [hibira_readers] shortcode or the hibira_readers() template tag."
+msgstr "記事を読んでいる人数を表示します。読者ごとに presence チャンネルの接続を 1 つ使い、100 人を超えると 100+ と表示します。ページの隅、または [hibira_readers] ショートコードや hibira_readers() テンプレートタグを置いた場所に表示されます。"
+
+msgid "WooCommerce order status"
+msgstr "WooCommerce の注文ステータス"
+
+msgid "The order received and view order pages update when the order status changes."
+msgstr "注文ステータスが変わると、注文完了ページと注文詳細ページが更新されます。"
+
+msgid "Admin notices"
+msgstr "管理画面の通知"
+
+msgid "Shows a notice in wp-admin for new orders and for comments awaiting approval."
+msgstr "新しい注文や承認待ちのコメントがあると、wp-admin に通知を表示します。"
+
+msgid "Check the connection"
+msgstr "接続を確認"
+
+msgid "Send a test event"
+msgstr "テストイベントを送信"
+
+msgid "Hibira is not configured."
+msgstr "Hibira が設定されていません。"
+
+msgid "This post was updated."
+msgstr "この記事は更新されました。"
+
+msgid "Reload"
+msgstr "再読み込み"
+
+msgid "New comment"
+msgstr "新しいコメント"
+
+msgid "%s reading now"
+msgstr "%s 人が閲覧中"
+
+msgid "100+ reading now"
+msgstr "100 人以上が閲覧中"
+
+msgid "Order status: %s"
+msgstr "注文ステータス：%s"
+
+msgid "New order %s"
+msgstr "新しい注文 %s"
+
+msgid "New comment awaiting approval on \"%s\""
+msgstr "「%s」に承認待ちの新しいコメントがあります"
+
+msgid "View"
+msgstr "表示"
+
+msgid "Dismiss"
+msgstr "閉じる"
+

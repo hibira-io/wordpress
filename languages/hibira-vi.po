@@ -1,0 +1,124 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Hibira Realtime 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/hibira-io/wordpress/issues\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: vi\n"
+"X-Domain: hibira\n"
+
+msgid "Settings"
+msgstr "Cài đặt"
+
+msgid "You are not allowed to do this."
+msgstr "Bạn không có quyền làm việc này."
+
+msgid "Connected. A test event was sent to the channel \"hibira-test\"; you can see it in the debug console of your app in the Hibira portal."
+msgstr "Đã kết nối. Một sự kiện thử đã được gửi tới kênh \"hibira-test\"; bạn có thể xem trong bảng gỡ lỗi của ứng dụng trên cổng Hibira."
+
+msgid "Create a free app at %s (no card needed), then copy its app ID, key and secret here."
+msgstr "Tạo một ứng dụng miễn phí tại %s (không cần thẻ), rồi sao chép App ID, Key và Secret vào đây."
+
+msgid "Connection"
+msgstr "Kết nối"
+
+msgid "App ID"
+msgstr "App ID"
+
+msgid "Key"
+msgstr "Key"
+
+msgid "Secret"
+msgstr "Secret"
+
+msgid "Saved. Leave empty to keep it."
+msgstr "Đã lưu. Để trống để giữ nguyên."
+
+msgid "Never sent to browsers. To keep it out of the database, define HIBIRA_APP_SECRET in wp-config.php instead."
+msgstr "Không bao giờ gửi tới trình duyệt. Để không lưu trong cơ sở dữ liệu, hãy khai báo HIBIRA_APP_SECRET trong wp-config.php."
+
+msgid "Host"
+msgstr "Máy chủ"
+
+msgid "ws.hibira.io for the default cluster. Change it only for another cluster or a self-hosted server."
+msgstr "ws.hibira.io cho cụm mặc định. Chỉ đổi khi dùng cụm khác hoặc máy chủ tự lưu trữ."
+
+msgid "Port"
+msgstr "Cổng"
+
+msgid "TLS (https and wss)"
+msgstr "TLS (https và wss)"
+
+msgid "Features"
+msgstr "Tính năng"
+
+msgid "Live comments"
+msgstr "Bình luận trực tiếp"
+
+msgid "Approved comments appear for every reader of the post without a reload."
+msgstr "Bình luận được duyệt hiện ra cho mọi người đang đọc bài mà không cần tải lại."
+
+msgid "Post updated notice"
+msgstr "Thông báo bài viết được cập nhật"
+
+msgid "Readers of a post see a notice with a reload button when you update it."
+msgstr "Khi bạn cập nhật bài, người đang đọc sẽ thấy thông báo kèm nút tải lại."
+
+msgid "Readers now"
+msgstr "Số người đang đọc"
+
+msgid "Shows how many people are reading a post. Each reader holds a presence channel connection; counts above 100 show as 100+. It shows in a corner of the page, or where you put the [hibira_readers] shortcode or the hibira_readers() template tag."
+msgstr "Hiện số người đang đọc bài. Mỗi người đọc dùng một kết nối presence channel; trên 100 người sẽ hiện 100+. Hiện ở góc trang, hoặc nơi bạn đặt shortcode [hibira_readers] hay template tag hibira_readers()."
+
+msgid "WooCommerce order status"
+msgstr "Trạng thái đơn hàng WooCommerce"
+
+msgid "The order received and view order pages update when the order status changes."
+msgstr "Trang đã nhận đơn và trang xem đơn hàng tự cập nhật khi trạng thái đơn thay đổi."
+
+msgid "Admin notices"
+msgstr "Thông báo quản trị"
+
+msgid "Shows a notice in wp-admin for new orders and for comments awaiting approval."
+msgstr "Hiện thông báo trong wp-admin khi có đơn hàng mới và bình luận chờ duyệt."
+
+msgid "Check the connection"
+msgstr "Kiểm tra kết nối"
+
+msgid "Send a test event"
+msgstr "Gửi sự kiện thử"
+
+msgid "Hibira is not configured."
+msgstr "Chưa cấu hình Hibira."
+
+msgid "This post was updated."
+msgstr "Bài viết này vừa được cập nhật."
+
+msgid "Reload"
+msgstr "Tải lại"
+
+msgid "New comment"
+msgstr "Bình luận mới"
+
+msgid "%s reading now"
+msgstr "%s người đang đọc"
+
+msgid "100+ reading now"
+msgstr "100+ người đang đọc"
+
+msgid "Order status: %s"
+msgstr "Trạng thái đơn hàng: %s"
+
+msgid "New order %s"
+msgstr "Đơn hàng mới %s"
+
+msgid "New comment awaiting approval on \"%s\""
+msgstr "Bình luận mới chờ duyệt ở \"%s\""
+
+msgid "View"
+msgstr "Xem"
+
+msgid "Dismiss"
+msgstr "Đóng"
+
