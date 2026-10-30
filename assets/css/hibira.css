@@ -1,0 +1,101 @@
+.hibira-toasts {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right, 0px));
+  bottom: max(16px, env(safe-area-inset-bottom, 0px));
+  z-index: 100000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: min(420px, calc(100vw - 32px));
+}
+
+.hibira-toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: #1d2733;
+  color: #f2f5f7;
+  font: 14px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+  animation: hibira-in 0.2s ease-out;
+}
+
+.hibira-toast-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.hibira-toast-action {
+  color: #5fd4c3;
+  font-weight: 600;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  text-decoration: none;
+}
+
+.hibira-toast-close {
+  background: none;
+  border: 0;
+  color: #9fb0bd;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0 2px;
+}
+
+.hibira-toast-action:focus-visible,
+.hibira-toast-close:focus-visible {
+  outline: 2px solid #5fd4c3;
+  outline-offset: 2px;
+}
+
+.hibira-live-comment {
+  animation: hibira-flash 2s ease-out;
+}
+
+.hibira-readers {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875em;
+}
+
+.hibira-readers::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2fae5f;
+}
+
+.hibira-readers-float {
+  position: fixed;
+  left: max(16px, env(safe-area-inset-left, 0px));
+  bottom: max(16px, env(safe-area-inset-bottom, 0px));
+  z-index: 99999;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #1d2733;
+  color: #f2f5f7;
+  font: 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+}
+
+@keyframes hibira-in {
+  from { opacity: 0; transform: translateY(8px); }
+}
+
+@keyframes hibira-flash {
+  from { background-color: rgba(95, 212, 195, 0.25); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hibira-toast,
+  .hibira-live-comment {
+    animation: none;
+  }
+}

@@ -1,0 +1,124 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Hibira Realtime 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/hibira-io/wordpress/issues\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"X-Domain: hibira\n"
+
+msgid "Settings"
+msgstr "設定"
+
+msgid "You are not allowed to do this."
+msgstr "你沒有權限執行這個動作。"
+
+msgid "Connected. A test event was sent to the channel \"hibira-test\"; you can see it in the debug console of your app in the Hibira portal."
+msgstr "已連線。測試事件已送到頻道「hibira-test」，可以在 Hibira 主控台中這個 app 的除錯畫面看到。"
+
+msgid "Create a free app at %s (no card needed), then copy its app ID, key and secret here."
+msgstr "在 %s 免費建立一個 app（不需要信用卡），再把它的 App ID、Key 和 Secret 貼到這裡。"
+
+msgid "Connection"
+msgstr "連線"
+
+msgid "App ID"
+msgstr "App ID"
+
+msgid "Key"
+msgstr "Key"
+
+msgid "Secret"
+msgstr "Secret"
+
+msgid "Saved. Leave empty to keep it."
+msgstr "已儲存。留空就會保留原值。"
+
+msgid "Never sent to browsers. To keep it out of the database, define HIBIRA_APP_SECRET in wp-config.php instead."
+msgstr "不會送到瀏覽器。若不想存在資料庫裡，可以改在 wp-config.php 定義 HIBIRA_APP_SECRET。"
+
+msgid "Host"
+msgstr "主機"
+
+msgid "ws.hibira.io for the default cluster. Change it only for another cluster or a self-hosted server."
+msgstr "預設叢集為 ws.hibira.io。只有使用其他叢集或自架伺服器時才需要修改。"
+
+msgid "Port"
+msgstr "連接埠"
+
+msgid "TLS (https and wss)"
+msgstr "TLS（https 和 wss）"
+
+msgid "Features"
+msgstr "功能"
+
+msgid "Live comments"
+msgstr "即時留言"
+
+msgid "Approved comments appear for every reader of the post without a reload."
+msgstr "核准的留言會直接出現在所有讀者的頁面上，不用重新整理。"
+
+msgid "Post updated notice"
+msgstr "文章更新提示"
+
+msgid "Readers of a post see a notice with a reload button when you update it."
+msgstr "你更新文章時，正在閱讀的讀者會看到提示和重新整理按鈕。"
+
+msgid "Readers now"
+msgstr "正在閱讀人數"
+
+msgid "Shows how many people are reading a post. Each reader holds a presence channel connection; counts above 100 show as 100+. It shows in a corner of the page, or where you put the [hibira_readers] shortcode or the hibira_readers() template tag."
+msgstr "顯示有多少人正在讀這篇文章。每位讀者會占用一個 presence 頻道連線，超過 100 人時顯示為 100+。會顯示在頁面角落，或你放 [hibira_readers] 短代碼、hibira_readers() 樣板函式的位置。"
+
+msgid "WooCommerce order status"
+msgstr "WooCommerce 訂單狀態"
+
+msgid "The order received and view order pages update when the order status changes."
+msgstr "訂單狀態改變時，「訂單已收到」和「查看訂單」頁面會即時更新。"
+
+msgid "Admin notices"
+msgstr "後台通知"
+
+msgid "Shows a notice in wp-admin for new orders and for comments awaiting approval."
+msgstr "有新訂單或待審核留言時，在 wp-admin 顯示通知。"
+
+msgid "Check the connection"
+msgstr "檢查連線"
+
+msgid "Send a test event"
+msgstr "送出測試事件"
+
+msgid "Hibira is not configured."
+msgstr "尚未設定 Hibira。"
+
+msgid "This post was updated."
+msgstr "這篇文章已更新。"
+
+msgid "Reload"
+msgstr "重新整理"
+
+msgid "New comment"
+msgstr "新留言"
+
+msgid "%s reading now"
+msgstr "%s 人正在閱讀"
+
+msgid "100+ reading now"
+msgstr "100+ 人正在閱讀"
+
+msgid "Order status: %s"
+msgstr "訂單狀態：%s"
+
+msgid "New order %s"
+msgstr "新訂單 %s"
+
+msgid "New comment awaiting approval on \"%s\""
+msgstr "「%s」有一則新留言等待審核"
+
+msgid "View"
+msgstr "查看"
+
+msgid "Dismiss"
+msgstr "關閉"
+

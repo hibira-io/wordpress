@@ -1,0 +1,123 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Hibira Realtime 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/hibira-io/wordpress/issues\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Domain: hibira\n"
+
+msgid "Settings"
+msgstr ""
+
+msgid "You are not allowed to do this."
+msgstr ""
+
+msgid "Connected. A test event was sent to the channel \"hibira-test\"; you can see it in the debug console of your app in the Hibira portal."
+msgstr ""
+
+msgid "Create a free app at %s (no card needed), then copy its app ID, key and secret here."
+msgstr ""
+
+msgid "Connection"
+msgstr ""
+
+msgid "App ID"
+msgstr ""
+
+msgid "Key"
+msgstr ""
+
+msgid "Secret"
+msgstr ""
+
+msgid "Saved. Leave empty to keep it."
+msgstr ""
+
+msgid "Never sent to browsers. To keep it out of the database, define HIBIRA_APP_SECRET in wp-config.php instead."
+msgstr ""
+
+msgid "Host"
+msgstr ""
+
+msgid "ws.hibira.io for the default cluster. Change it only for another cluster or a self-hosted server."
+msgstr ""
+
+msgid "Port"
+msgstr ""
+
+msgid "TLS (https and wss)"
+msgstr ""
+
+msgid "Features"
+msgstr ""
+
+msgid "Live comments"
+msgstr ""
+
+msgid "Approved comments appear for every reader of the post without a reload."
+msgstr ""
+
+msgid "Post updated notice"
+msgstr ""
+
+msgid "Readers of a post see a notice with a reload button when you update it."
+msgstr ""
+
+msgid "Readers now"
+msgstr ""
+
+msgid "Shows how many people are reading a post. Each reader holds a presence channel connection; counts above 100 show as 100+. It shows in a corner of the page, or where you put the [hibira_readers] shortcode or the hibira_readers() template tag."
+msgstr ""
+
+msgid "WooCommerce order status"
+msgstr ""
+
+msgid "The order received and view order pages update when the order status changes."
+msgstr ""
+
+msgid "Admin notices"
+msgstr ""
+
+msgid "Shows a notice in wp-admin for new orders and for comments awaiting approval."
+msgstr ""
+
+msgid "Check the connection"
+msgstr ""
+
+msgid "Send a test event"
+msgstr ""
+
+msgid "Hibira is not configured."
+msgstr ""
+
+msgid "This post was updated."
+msgstr ""
+
+msgid "Reload"
+msgstr ""
+
+msgid "New comment"
+msgstr ""
+
+msgid "%s reading now"
+msgstr ""
+
+msgid "100+ reading now"
+msgstr ""
+
+msgid "Order status: %s"
+msgstr ""
+
+msgid "New order %s"
+msgstr ""
+
+msgid "New comment awaiting approval on \"%s\""
+msgstr ""
+
+msgid "View"
+msgstr ""
+
+msgid "Dismiss"
+msgstr ""
+
