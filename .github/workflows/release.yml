@@ -1,0 +1,25 @@
+# Attaches hibira.zip to each published GitHub Release, ready for Plugins →
+# Add New → Upload Plugin. It unpacks to hibira/ whatever the version, so an
+# upload replaces the installed plugin instead of adding a second copy. The
+# tag must be v<Version from hibira.php>, e.g. v0.1.0.
+name: release
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  zip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tag matches the plugin version
+        run: |
+          version="$(sed -n 's/^ \* Version: *//p' hibira.php)"
+          [ "v$version" = "$GITHUB_REF_NAME" ] || { echo "tag $GITHUB_REF_NAME != v$version"; exit 1; }
+      - run: git archive --format=zip --prefix=hibira/ -o hibira.zip HEAD
+      - run: gh release upload "$GITHUB_REF_NAME" hibira.zip --clobber
+        env:
+          GH_TOKEN: ${{ github.token }}
