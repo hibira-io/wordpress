@@ -18,9 +18,9 @@ No Composer, no build step: the PHP side signs Hibira HTTP API calls itself
 
 ## Install
 
-Until it is on WordPress.org: download the zip from
-[Releases](https://github.com/hibira-io/wordpress/releases), then **Plugins →
-Add New → Upload Plugin**. Go to **Settings → Hibira**, paste the app ID, key
+Until it is on WordPress.org: download `hibira.zip` from the
+[latest release](https://github.com/hibira-io/wordpress/releases/latest), then
+**Plugins → Add New → Upload Plugin**. Go to **Settings → Hibira**, paste the app ID, key
 and secret from your app in the [Hibira portal](https://hibira.io/portal)
 (the free plan is enough) and press **Send a test event**.
 
