@@ -4,7 +4,7 @@ Tags: realtime, live comments, websocket, woocommerce, notifications
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.0
+Stable tag: 0.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,6 +63,9 @@ Each event counts as one message, however many readers receive it. Readers now u
 Live comments use WordPress's classic comment markup (`li.comment > article.comment-body`). To change what is sent, use the `hibira_comment_payload` filter.
 
 == Changelog ==
+
+= 0.1.1 =
+* README: cover image and screenshots.
 
 = 0.1.0 =
 * First release: live comments, post updated notice, readers now, WooCommerce order status, admin notices, `hibira_trigger()`.

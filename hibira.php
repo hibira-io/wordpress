@@ -3,7 +3,7 @@
  * Plugin Name:       Hibira Realtime
  * Plugin URI:        https://github.com/hibira-io/wordpress
  * Description:       Live comments, "this post was updated" notices, a readers-now count and live WooCommerce order status, on Hibira's Pusher-compatible realtime service.
- * Version:           0.1.0
+ * Version:           0.1.1
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Hibira
@@ -18,7 +18,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'HIBIRA_VERSION', '0.1.0' );
+define( 'HIBIRA_VERSION', '0.1.1' );
 define( 'HIBIRA_FILE', __FILE__ );
 define( 'HIBIRA_DIR', plugin_dir_path( __FILE__ ) );
 define( 'HIBIRA_URL', plugin_dir_url( __FILE__ ) );
