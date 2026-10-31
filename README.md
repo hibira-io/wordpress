@@ -1,5 +1,7 @@
 # Hibira Realtime for WordPress
 
+![Hibira Realtime for WordPress](.github/cover.jpg)
+
 [![ci](https://github.com/hibira-io/wordpress/actions/workflows/ci.yml/badge.svg)](https://github.com/hibira-io/wordpress/actions/workflows/ci.yml)
 
 A WordPress plugin that makes a site update while people are looking at it,
