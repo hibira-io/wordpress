@@ -102,10 +102,3 @@ class Hibira_Posts {
 		return '<span class="hibira-readers" data-hibira-readers hidden></span>';
 	}
 }
-
-/**
- * Prints the readers-now count of the current post (when Readers now is on).
- */
-function hibira_readers() {
-	echo Hibira_Posts::readers_html(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed markup.
-}

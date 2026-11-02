@@ -4,7 +4,7 @@ Tags: realtime, live comments, websocket, woocommerce, notifications
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.1
+Stable tag: 0.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,12 @@ This plugin connects to Hibira (ws.hibira.io by default, or the host you set):
 * Visitors' browsers open a WebSocket connection to Hibira on posts and order pages, to receive those events. For the readers-now count, each browser joins with a random ID; no names or personal data are sent.
 
 Hibira's [terms](https://hibira.io/legal/terms) and [privacy policy](https://hibira.io/legal/privacy).
+
+= Source code and libraries =
+
+The plugin's source, with its tests, is at [github.com/hibira-io/wordpress](https://github.com/hibira-io/wordpress).
+
+`assets/vendor/pusher.min.js` is the minified build of [pusher-js](https://github.com/pusher/pusher-js) 8.6.0 (MIT), unchanged except for the removed source map comment. Its source is at [github.com/pusher/pusher-js](https://github.com/pusher/pusher-js), and the same file can be built with `npm install pusher-js@8.6.0` (`dist/web/pusher.min.js`).
 
 == Installation ==
 
@@ -63,6 +69,11 @@ Each event counts as one message, however many readers receive it. Readers now u
 Live comments use WordPress's classic comment markup (`li.comment > article.comment-body`). To change what is sent, use the `hibira_comment_payload` filter.
 
 == Changelog ==
+
+= 0.1.2 =
+* Translations come from translate.wordpress.org; the plugin no longer ships .po/.mo files or calls load_plugin_textdomain().
+* The auth endpoint checks each channel in its permission callback and validates its parameters.
+* Stricter sanitizing of settings and of live comment HTML.
 
 = 0.1.1 =
 * README: cover image and screenshots.

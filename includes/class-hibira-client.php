@@ -120,7 +120,7 @@ class Hibira_Client {
 		$to_sign = $socket_id . ':' . $channel;
 		$out     = array();
 		if ( null !== $presence ) {
-			$channel_data = wp_json_encode(
+			$channel_data        = wp_json_encode(
 				array(
 					'user_id'   => (string) $presence['user_id'],
 					'user_info' => isset( $presence['user_info'] ) ? (object) $presence['user_info'] : new stdClass(),
