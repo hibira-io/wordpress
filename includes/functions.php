@@ -13,10 +13,10 @@ defined( 'ABSPATH' ) || exit;
  * @return Hibira_Client|null
  */
 function hibira() {
-	static $client = null;
+	static $client    = null;
 	static $signature = null;
-	$s   = Hibira_Settings::get();
-	$sig = md5( wp_json_encode( array( $s['app_id'], $s['key'], $s['secret'], $s['host'], $s['port'], $s['tls'] ) ) );
+	$s                = Hibira_Settings::get();
+	$sig              = md5( wp_json_encode( array( $s['app_id'], $s['key'], $s['secret'], $s['host'], $s['port'], $s['tls'] ) ) );
 	if ( $sig !== $signature ) {
 		$signature = $sig;
 		$client    = Hibira_Settings::configured()
@@ -85,15 +85,15 @@ function hibira_register_client_script() {
 		'hibira',
 		'HibiraConfig',
 		array(
-			'key'      => $s['key'],
-			'host'     => $s['host'],
-			'port'     => (int) $s['port'],
-			'tls'      => (bool) $s['tls'],
-			'authUrl'  => esc_url_raw( rest_url( 'hibira/v1/auth' ) ),
+			'key'     => $s['key'],
+			'host'    => $s['host'],
+			'port'    => (int) $s['port'],
+			'tls'     => (bool) $s['tls'],
+			'authUrl' => esc_url_raw( rest_url( 'hibira/v1/auth' ) ),
 			// Only signed-in users send a nonce: a cached page can hold a stale
 			// one, which the REST API refuses even for visitors.
-			'nonce'    => is_user_logged_in() ? wp_create_nonce( 'wp_rest' ) : '',
-			'i18n'     => array(
+			'nonce'   => is_user_logged_in() ? wp_create_nonce( 'wp_rest' ) : '',
+			'i18n'    => array(
 				'updated'     => __( 'This post was updated.', 'hibira' ),
 				'reload'      => __( 'Reload', 'hibira' ),
 				'newComment'  => __( 'New comment', 'hibira' ),
@@ -111,4 +111,11 @@ function hibira_register_client_script() {
 			),
 		)
 	);
+}
+
+/**
+ * Prints the readers-now count of the current post (when Readers now is on).
+ */
+function hibira_readers() {
+	echo Hibira_Posts::readers_html(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed markup.
 }

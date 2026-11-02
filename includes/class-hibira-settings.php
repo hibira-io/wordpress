@@ -95,11 +95,12 @@ class Hibira_Settings {
 		foreach ( array( 'app_id', 'key', 'host' ) as $f ) {
 			$out[ $f ] = isset( $in[ $f ] ) ? sanitize_text_field( wp_unslash( $in[ $f ] ) ) : '';
 		}
+		$out['host'] = self::sanitize_host( $out['host'] );
 		if ( '' === $out['host'] ) {
 			$out['host'] = 'ws.hibira.io';
 		}
 		// An empty secret field keeps the saved secret; the form never shows it.
-		$secret        = isset( $in['secret'] ) ? trim( (string) wp_unslash( $in['secret'] ) ) : '';
+		$secret        = isset( $in['secret'] ) ? sanitize_text_field( wp_unslash( $in['secret'] ) ) : '';
 		$out['secret'] = '' !== $secret ? $secret : ( isset( $old['secret'] ) ? (string) $old['secret'] : '' );
 		$out['port']   = isset( $in['port'] ) ? max( 1, min( 65535, (int) $in['port'] ) ) : 443;
 		foreach ( array( 'tls', 'live_comments', 'post_updates', 'readers', 'woo_orders', 'admin_notices' ) as $f ) {
@@ -108,13 +109,35 @@ class Hibira_Settings {
 		return $out;
 	}
 
+	/**
+	 * A host name only, also from a pasted URL: no scheme, port or path.
+	 *
+	 * @param string $host What was typed.
+	 * @return string
+	 */
+	public static function sanitize_host( $host ) {
+		$host = trim( (string) $host );
+		if ( false !== strpos( $host, '://' ) ) {
+			$host = (string) wp_parse_url( $host, PHP_URL_HOST );
+		}
+		$host = preg_replace( '#[/:?\#].*$#', '', $host );
+		return strtolower( preg_replace( '/[^A-Za-z0-9.\-]/', '', $host ) );
+	}
+
 	/** Sends a test event and lists channels, which checks the ID, key and secret. */
 	public static function test() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_die( esc_html__( 'You are not allowed to do this.', 'hibira' ), 403 );
 		}
 		check_admin_referer( 'hibira_test' );
-		$result = hibira_trigger( 'hibira-test', 'test', array( 'from' => 'wordpress', 'at' => time() ) );
+		$result = hibira_trigger(
+			'hibira-test',
+			'test',
+			array(
+				'from' => 'wordpress',
+				'at'   => time(),
+			)
+		);
 		if ( ! is_wp_error( $result ) ) {
 			$result = hibira()->get( '/channels' );
 		}

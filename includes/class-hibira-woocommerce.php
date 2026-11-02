@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
 class Hibira_WooCommerce {
 
 	public static function init() {
-		add_action( 'woocommerce_order_status_changed', array( __CLASS__, 'status_changed' ), 10, 4 );
+		add_action( 'woocommerce_order_status_changed', array( __CLASS__, 'status_changed' ), 10, 3 );
 		add_action( 'woocommerce_checkout_order_processed', array( __CLASS__, 'new_order' ), 10, 1 );
 		add_action( 'woocommerce_store_api_checkout_order_processed', array( __CLASS__, 'new_order' ), 10, 1 );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue' ) );
@@ -42,7 +42,7 @@ class Hibira_WooCommerce {
 		return '' !== $order_key && hash_equals( (string) $order->get_order_key(), $order_key );
 	}
 
-	public static function status_changed( $order_id, $from, $to, $order = null ) {
+	public static function status_changed( $order_id, $from, $to ) {
 		if ( ! Hibira_Settings::enabled( 'woo_orders' ) ) {
 			return;
 		}
@@ -85,7 +85,7 @@ class Hibira_WooCommerce {
 		$key   = '';
 		if ( is_order_received_page() ) {
 			$order_id = absint( get_query_var( 'order-received' ) );
-			$key      = isset( $_GET['key'] ) ? wc_clean( wp_unslash( $_GET['key'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- WooCommerce's own order received URL.
+			$key      = isset( $_GET['key'] ) ? sanitize_text_field( wp_unslash( $_GET['key'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- WooCommerce's own order received URL.
 			$order    = wc_get_order( $order_id );
 		} elseif ( is_view_order_page() ) {
 			$order = wc_get_order( absint( get_query_var( 'view-order' ) ) );

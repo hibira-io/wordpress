@@ -18,10 +18,23 @@ defined( 'ABSPATH' ) || exit;
 
 class Hibira_Auth {
 
+	/**
+	 * Decisions made during this request, by request object.
+	 *
+	 * @var array
+	 */
+	private static $decisions = array();
+
+	/**
+	 * Hooks the REST route.
+	 */
 	public static function init() {
 		add_action( 'rest_api_init', array( __CLASS__, 'routes' ) );
 	}
 
+	/**
+	 * Registers POST /wp-json/hibira/v1/auth.
+	 */
 	public static function routes() {
 		register_rest_route(
 			'hibira/v1',
@@ -29,35 +42,72 @@ class Hibira_Auth {
 			array(
 				'methods'             => 'POST',
 				'callback'            => array( __CLASS__, 'auth' ),
-				'permission_callback' => '__return_true', // Each channel is checked in decide().
+				'permission_callback' => array( __CLASS__, 'permission' ),
 				'args'                => array(
 					'socket_id'    => array(
-						'type'     => 'string',
-						'required' => true,
+						'type'              => 'string',
+						'required'          => true,
+						'validate_callback' => array( 'Hibira_Client', 'valid_socket_id' ),
 					),
 					'channel_name' => array(
-						'type'     => 'string',
-						'required' => true,
+						'type'              => 'string',
+						'required'          => true,
+						'validate_callback' => array( 'Hibira_Client', 'valid_channel' ),
+					),
+					'order_key'    => array(
+						'type'              => 'string',
+						'default'           => '',
+						'sanitize_callback' => 'sanitize_text_field',
+					),
+					'visitor'      => array(
+						'type'              => 'string',
+						'default'           => '',
+						'sanitize_callback' => 'sanitize_text_field',
 					),
 				),
 			)
 		);
 	}
 
+	/**
+	 * Lets the request through only for a channel the visitor may join. Pusher
+	 * clients call this endpoint for visitors too (Readers now, guest order
+	 * pages), so the check is per channel rather than per capability.
+	 *
+	 * @param WP_REST_Request $request The auth request.
+	 * @return true|WP_Error
+	 */
+	public static function permission( WP_REST_Request $request ) {
+		if ( ! Hibira_Settings::configured() ) {
+			return new WP_Error( 'hibira_config', __( 'Hibira is not configured.', 'hibira' ), array( 'status' => 503 ) );
+		}
+		$decision = self::decision( $request );
+		if ( false === $decision || null === $decision ) {
+			return new WP_Error( 'hibira_forbidden', __( 'You cannot subscribe to this channel.', 'hibira' ), array( 'status' => 403 ) );
+		}
+		return true;
+	}
+
+	/**
+	 * Signs the subscription.
+	 *
+	 * @param WP_REST_Request $request The auth request.
+	 * @return WP_REST_Response|WP_Error
+	 */
 	public static function auth( WP_REST_Request $request ) {
 		$client = hibira();
 		if ( ! $client ) {
-			return new WP_Error( 'hibira_config', 'Hibira is not configured.', array( 'status' => 503 ) );
+			return new WP_Error( 'hibira_config', __( 'Hibira is not configured.', 'hibira' ), array( 'status' => 503 ) );
 		}
 		$channel  = (string) $request['channel_name'];
-		$decision = self::decide( $channel, $request );
+		$decision = self::decision( $request );
 		if ( false === $decision || null === $decision ) {
-			return new WP_Error( 'hibira_forbidden', 'Forbidden', array( 'status' => 403 ) );
+			return new WP_Error( 'hibira_forbidden', __( 'You cannot subscribe to this channel.', 'hibira' ), array( 'status' => 403 ) );
 		}
 		$presence = null;
 		if ( 0 === strpos( $channel, 'presence-' ) ) {
 			if ( ! is_array( $decision ) || empty( $decision['user_id'] ) ) {
-				return new WP_Error( 'hibira_forbidden', 'Presence channels need a user ID.', array( 'status' => 403 ) );
+				return new WP_Error( 'hibira_forbidden', __( 'Presence channels need a user ID.', 'hibira' ), array( 'status' => 403 ) );
 			}
 			$presence = $decision;
 		}
@@ -69,6 +119,20 @@ class Hibira_Auth {
 		$response = rest_ensure_response( $signed );
 		$response->header( 'Cache-Control', 'no-store' );
 		return $response;
+	}
+
+	/**
+	 * The decision for a request, made once and shared by permission() and auth().
+	 *
+	 * @param WP_REST_Request $request The auth request.
+	 * @return bool|array|null
+	 */
+	private static function decision( WP_REST_Request $request ) {
+		$id = spl_object_hash( $request );
+		if ( ! array_key_exists( $id, self::$decisions ) ) {
+			self::$decisions[ $id ] = self::decide( (string) $request['channel_name'], $request );
+		}
+		return self::$decisions[ $id ];
 	}
 
 	/**

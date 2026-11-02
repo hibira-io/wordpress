@@ -30,16 +30,16 @@ class Hibira_Comments {
 	/** The event data: what a reader's browser needs to show the comment. */
 	public static function payload( WP_Comment $comment ) {
 		$data = array(
-			'id'      => (int) $comment->comment_ID,
-			'parent'  => (int) $comment->comment_parent,
-			'author'  => get_comment_author( $comment ),
-			'url'     => get_comment_author_url( $comment ),
-			'avatar'  => get_avatar_url( $comment, array( 'size' => 64 ) ),
-			'date'    => get_comment_date( '', $comment ) . ' ' . get_comment_time( '', false, true, $comment ),
-			'iso'     => get_comment_date( 'c', $comment ),
-			'link'    => get_comment_link( $comment ),
-			// Comment text is filtered by kses when saved; comment_text adds the formatting.
-			'html'    => apply_filters( 'comment_text', get_comment_text( $comment ), $comment, array() ),
+			'id'     => (int) $comment->comment_ID,
+			'parent' => (int) $comment->comment_parent,
+			'author' => get_comment_author( $comment ),
+			'url'    => get_comment_author_url( $comment ),
+			'avatar' => get_avatar_url( $comment, array( 'size' => 64 ) ),
+			'date'   => get_comment_date( '', $comment ) . ' ' . get_comment_time( '', false, true, $comment ),
+			'iso'    => get_comment_date( 'c', $comment ),
+			'link'   => get_comment_link( $comment ),
+			// Core's comment_text filter adds the formatting; kses again before it leaves the site.
+			'html'   => wp_kses_post( apply_filters( 'comment_text', get_comment_text( $comment ), $comment, array() ) ), // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- core filter.
 		);
 		/**
 		 * Changes the data sent for a live comment. Keep it under 10 KB.

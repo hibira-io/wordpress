@@ -85,13 +85,16 @@ Filters: `hibira_live_post` (turn live features off per post),
 ## Develop
 
 ```sh
-php tests/run.php          # HTTP API signing, channel auth, requests (no WordPress needed)
-python3 tools/compile-mo.py  # languages/*.po → .mo
+php tests/run.php   # HTTP API signing, channel auth, requests (no WordPress needed)
+phpcs               # WordPress coding standards (phpcs.xml.dist)
 ```
 
-Translations: English, 繁體中文, 简体中文, 日本語, 한국어, ไทย, Tiếng Việt
-(`languages/`). CI runs the tests on PHP 7.4–8.4 and the WordPress Plugin
-Check.
+Strings are in `languages/hibira.pot`. The plugin does not ship .po/.mo
+files: WordPress.org builds and delivers them from
+[translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/hibira/).
+`translations/` keeps our 繁體中文, 简体中文, 日本語, 한국어, ไทย and Tiếng Việt
+.po files for importing there; they are left out of the plugin zip. CI runs the
+tests on PHP 7.4–8.4, PHPCS and the WordPress Plugin Check.
 
 ## License
 
