@@ -1,0 +1,86 @@
+# Publishes the plugin to the WordPress.org directory
+# (https://wordpress.org/plugins/hibira/) over SVN.
+#
+# - trunk/        <- git archive of this commit (export-ignore rules apply)
+# - tags/<ver>/   <- copy of trunk, <ver> = Version in hibira.php
+# - assets/       <- .wordpress-org/ (banners, icons, screenshots)
+#
+# Runs when a GitHub Release is published (tag v<Version>), or by hand from
+# the Actions tab. The SVN password lives in the SVN_PASSWORD repository
+# secret (WordPress.org profile → Account & Security → SVN password).
+name: wporg-deploy
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Build and show the SVN changes without committing
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency: wporg-deploy
+
+env:
+  SLUG: hibira
+  SVN_URL: https://plugins.svn.wordpress.org/hibira
+  SVN_USERNAME: hibira
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Versions agree
+        id: version
+        run: |
+          version="$(sed -n 's/^ \* Version: *//p' hibira.php)"
+          stable="$(sed -n 's/^Stable tag: *//p' readme.txt)"
+          [ "$version" = "$stable" ] || { echo "hibira.php $version != readme Stable tag $stable"; exit 1; }
+          if [ "$GITHUB_EVENT_NAME" = release ]; then
+            [ "v$version" = "$GITHUB_REF_NAME" ] || { echo "tag $GITHUB_REF_NAME != v$version"; exit 1; }
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Install Subversion
+        run: command -v svn || { sudo apt-get update -qq && sudo apt-get install -y -qq subversion; }
+
+      - name: Stage trunk, tag and assets
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          svn checkout --depth immediates "$SVN_URL" svn
+          svn update --set-depth infinity svn/trunk svn/assets
+          mkdir build
+          git archive --format=tar HEAD | tar -x -C build
+          rsync -rc --delete --exclude=.svn build/ svn/trunk/
+          rsync -rc --delete --exclude=.svn .wordpress-org/ svn/assets/
+          cd svn
+          svn add --force trunk assets > /dev/null
+          svn status | awk '/^!/ {print $2}' | xargs -r svn delete
+          shopt -s nullglob
+          for f in assets/*.png; do svn propset -q svn:mime-type image/png "$f"; done
+          for f in assets/*.jpg; do svn propset -q svn:mime-type image/jpeg "$f"; done
+          if svn ls "$SVN_URL/tags/$VERSION" > /dev/null 2>&1; then
+            echo "::notice::tags/$VERSION already exists; updating trunk and assets only"
+          else
+            svn update -q --set-depth immediates tags
+            svn copy -q trunk "tags/$VERSION"
+          fi
+          svn status
+
+      - name: Commit
+        if: ${{ !inputs.dry_run }}
+        working-directory: svn
+        env:
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          [ -n "$SVN_PASSWORD" ] || { echo "SVN_PASSWORD secret is not set"; exit 1; }
+          svn commit -m "Release $VERSION" \
+            --username "$SVN_USERNAME" --password "$SVN_PASSWORD" \
+            --non-interactive --no-auth-cache
