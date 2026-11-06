@@ -20,9 +20,10 @@ No Composer, no build step: the PHP side signs Hibira HTTP API calls itself
 
 ## Install
 
-Until it is on WordPress.org: download `hibira.zip` from the
-[latest release](https://github.com/hibira-io/wordpress/releases/latest), then
-**Plugins → Add New → Upload Plugin**. Go to **Settings → Hibira**, paste the app ID, key
+In wp-admin, **Plugins → Add New**, search for **Hibira Realtime** and install it
+([wordpress.org/plugins/hibira](https://wordpress.org/plugins/hibira/)). Or download
+`hibira.zip` from the [latest release](https://github.com/hibira-io/wordpress/releases/latest)
+and use **Upload Plugin**. Go to **Settings → Hibira**, paste the app ID, key
 and secret from your app in the [Hibira portal](https://hibira.io/portal)
 (the free plan is enough) and press **Send a test event**.
 
@@ -95,6 +96,15 @@ files: WordPress.org builds and delivers them from
 `translations/` keeps our 繁體中文, 简体中文, 日本語, 한국어, ไทย and Tiếng Việt
 .po files for importing there; they are left out of the plugin zip. CI runs the
 tests on PHP 7.4–8.4, PHPCS and the WordPress Plugin Check.
+
+## Release
+
+Bump `Version` in `hibira.php` and `Stable tag` in `readme.txt`, then publish a
+GitHub Release tagged `v<version>`. Two workflows run: `release` attaches
+`hibira.zip`, and `wporg-deploy` commits the same files to the WordPress.org SVN
+repo (`trunk/`, `tags/<version>/`, and `.wordpress-org/` → `assets/`). It needs
+the `SVN_PASSWORD` repository secret. To update only the banner or icons, run
+`wporg-deploy` by hand from the Actions tab.
 
 ## License
 
